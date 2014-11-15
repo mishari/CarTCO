@@ -6,11 +6,53 @@
 </head>
 <body>
 <div ng-controller="CostCalculatorController">
+<!-- form basically inspired by http://www.free-online-calculator-use.com/car-buying-calculator.html -->
 <form ng-submit="calculateCosts()">
   <ul>
     <li>
-      Distance: 
-      <input type="text" ng-model="distance" size="30">
+      Price of car: 
+    </li>
+    <li>
+      Sales Tax:
+    </li>
+    <li>
+      Annual registration:
+    </li>
+    <li>
+      Financing?
+    </li>
+    <li>
+      Down payment:
+    </li>
+    <li>
+      APR:
+    </li>
+    <li>
+      Months financed:
+    </li>
+    <li>
+      Annual Insurance:
+    </li>
+    <li>
+      Kilometers driven per year: <input type="text" ng-model="distance" size="30">
+    </li>
+    <li>
+      Trips made per year (365 x 2 = 730): 
+    </li>
+    <li>
+      Fuel economy (kilometers per litre)
+    </li>
+    <li>
+      Fuel cost per litre:
+    </li>
+    <li>
+      How many years old is the car?:
+    </li>
+    <li>
+      Years you expect to own this car: 
+    </li>
+    <li>
+      Annual maintenance & repair cost: 
     </li>
     <input type="submit" value="Calculate">
 </form>  
