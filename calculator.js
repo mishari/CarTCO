@@ -14,18 +14,20 @@ angular.module('todoApp', [])
   
   var GRABTAXI_FEE = 25;
 
+  $scope.data = {annualtrips : 444};
+  
   $scope.calculateCosts = function() {
-    $scope.uberxCost = UBERX_FLAG + $scope.distance * UBERX_PERKM + $scope.distance / AVG_SPEED * UBERX_PERMIN;
-    $scope.uberblkCost = UBERBLK_FLAG + $scope.distance * UBERBLK_PERKM + $scope.distance / AVG_SPEED * UBERBLK_PERMIN;
-    $scope.grabTaxiCost = GRABTAXI_FEE + calculateTaxi();
-    
+    $scope.uberxCost = ($scope.data.annualtrips * UBERX_FLAG) + $scope.data.distance * UBERX_PERKM + $scope.data.distance / AVG_SPEED * UBERX_PERMIN;
+    $scope.uberblkCost = ($scope.data.annualtrips * UBERBLK_FLAG) + $scope.data.distance * UBERBLK_PERKM + $scope.data.distance / AVG_SPEED * UBERBLK_PERMIN;
+    $scope.grabTaxiCost = ($scope.data.annualtrips * GRABTAXI_FEE) + calculateTaxi();
+    $scope.carCost = calculateCarCosts();
   };
   
   calculateTaxi = function() {
-    	var fare = 35;
+    var fare = 35;
     var increase = 5;
 	
-  	for (running_distance = 2; running_distance < $scope.distance ; running_distance++){
+  	for (running_distance = 2; running_distance < $scope.data.distance ; running_distance++){
   		if(running_distance <= 12){
   			increase =  5;
   		} else if(running_distance > 12 && running_distance <= 20){
@@ -43,6 +45,10 @@ angular.module('todoApp', [])
   		fare = fare + increase;
 		}
   	return fare
+  };
+  
+  calculateCarCosts = function() {
+    
   };
   
 }]);
