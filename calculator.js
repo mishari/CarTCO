@@ -14,7 +14,7 @@ angular.module('todoApp', [])
   
   var GRABTAXI_FEE = 25;
 
-  $scope.data = {annualtrips : 444};
+  $scope.data = {annualtrips : 730};
   
   $scope.calculateCosts = function() {
     $scope.uberxCost = ($scope.data.annualtrips * UBERX_FLAG) + $scope.data.distance * UBERX_PERKM + $scope.data.distance / AVG_SPEED * UBERX_PERMIN;
@@ -26,7 +26,9 @@ angular.module('todoApp', [])
   calculateTaxi = function() {
     var fare = 35;
     var increase = 5;
-	
+	  
+    var distance_per_trip = $scope.data.distance / $scope.data.annualtrips;
+  
   	for (running_distance = 2; running_distance < $scope.data.distance ; running_distance++){
   		if(running_distance <= 12){
   			increase =  5;
@@ -48,7 +50,12 @@ angular.module('todoApp', [])
   };
   
   calculateCarCosts = function() {
+    var carTCO = 0;
+    // Price per year is price of car averaged over several years.
+    var price_per_year = $scope.data.price / $scope.data.caryears;
+    carTCO += price_per_year;
     
+    return carTCO;
   };
   
 }]);
