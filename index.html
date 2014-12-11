@@ -10,50 +10,50 @@
 <form ng-submit="calculateCosts()">
   <ul>
     <li>
-      Price of car: <input type="text" ng-model="data.price" size="30">
+      Price of car: <input type="number" ng-model="data.price" size="30">
     </li>
     <li>
-      Sales Tax: <input type="text" ng-model="data.tax" size="30">
+      Sales Tax: <input type="number" ng-model="data.tax" size="30">
     </li>
     <li>
-      Annual registration: <input type="text" ng-model="data.registration" size="30">
+      Annual registration: <input type="number" ng-model="data.registration" size="30">
     </li>
     <li>
-      Financing? <input type="radio" ng-model="data.financing" value="1" />Yes
-    <input type="radio" ng-model="data.financing" value="0" />no
+      Financing? <input type="radio" ng-model="data.financing" ng-value="true" />Yes
+    <input type="radio" ng-model="data.financing" ng-value="false" />no
     </li>
     <li>
-      Down payment: <input type="text" ng-model="data.downpayment" size="30">
+      Down payment: <input type="number" ng-model="data.downpayment" size="30">
     </li>
     <li>
-      APR: <input type="text" ng-model="data.apr" size="30">
+      APR: <input type="number" ng-model="data.apr" size="30">
     </li>
     <li>
-      Months financed: <input type="text" ng-model="data.monthsfinanced" size="30">
+      Months financed: <input type="number" ng-model="data.monthsfinanced" size="30">
     </li>
     <li>
-      Annual Insurance: <input type="text" ng-model="data.insurance" size="30">
+      Annual Insurance: <input type="number" ng-model="data.insurance" size="30">
     </li>
     <li>
-      Kilometers driven per year: <input type="text" ng-model="data.distance" size="30">
+      Kilometers driven per year: <input type="number" ng-model="data.distance" size="30">
     </li>
     <li>
-      Trips made per year (365 x 2 = 730): <input type="text" ng-model="data.annualtrips" size="30">
+      Trips made per year (365 x 2 = 730): <input type="number" ng-model="data.annualtrips" size="30">
     </li>
     <li>
-      Fuel economy (kilometers per litre) <input type="text" ng-model="data.fueleconomy" size="30">
+      Fuel economy (kilometers per litre) <input type="number" ng-model="data.fueleconomy" size="30">
     </li>
     <li>
-      Fuel cost per litre: <input type="text" ng-model="data.fuelcost" size="30">
+      Fuel cost per litre: <input type="number" ng-model="data.fuelcost" size="30">
     </li>
     <li>
-      How many years old is the car?: <input type="text" ng-model="data.carage" size="30">
+      How many years old is the car?: <input type="number" ng-model="data.carage" size="30">
     </li>
     <li>
-      Years you expect to own this car: <input type="text" ng-model="data.caryears" size="30">
+      Years you expect to own this car: <input type="number" ng-model="data.caryears" size="30">
     </li>
     <li>
-      Annual maintenance & repair cost: <input type="text" ng-model="data.maintenance" size="30">
+      Annual maintenance & repair cost: <input type="number" ng-model="data.maintenance" size="30">
     </li>
     <input type="submit" value="Calculate">
 </form>  

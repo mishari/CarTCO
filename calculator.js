@@ -16,9 +16,11 @@ angular.module('todoApp', [])
 
   $scope.data = {annualtrips : 730};
   
+  $scope.data.financing = true;
+  
   $scope.calculateCosts = function() {
-    $scope.uberxCost = ($scope.data.annualtrips * UBERX_FLAG) + $scope.data.distance * UBERX_PERKM + $scope.data.distance / AVG_SPEED * UBERX_PERMIN;
-    $scope.uberblkCost = ($scope.data.annualtrips * UBERBLK_FLAG) + $scope.data.distance * UBERBLK_PERKM + $scope.data.distance / AVG_SPEED * UBERBLK_PERMIN;
+    $scope.uberxCost = ($scope.data.annualtrips * UBERX_FLAG) + $scope.data.distance * UBERX_PERKM + ($scope.data.distance / AVG_SPEED) * UBERX_PERMIN;
+    $scope.uberblkCost = ($scope.data.annualtrips * UBERBLK_FLAG) + $scope.data.distance * UBERBLK_PERKM + ($scope.data.distance / AVG_SPEED) * UBERBLK_PERMIN;
     $scope.grabTaxiCost = ($scope.data.annualtrips * GRABTAXI_FEE) + calculateTaxi();
     $scope.carCost = calculateCarCosts();
   };
@@ -54,7 +56,16 @@ angular.module('todoApp', [])
     // Price per year is price of car averaged over several years.
     var price_per_year = $scope.data.price / $scope.data.caryears;
     carTCO += price_per_year;
+      
+    // Add cost of petrol
+    carTCO += ($scope.data.distance / $scope.data.fueleconomy) * $scope.data.fuelcost;
     
+    // Add annual registration costs
+    carTCO += $scope.data.registration;
+    
+    // Add annual repair costs
+    carTCO += $scope.data.maintenance;
+            
     return carTCO;
   };
   
