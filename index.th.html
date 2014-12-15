@@ -26,58 +26,58 @@
 </head>
 <body>
 <div ng-controller="CostCalculatorController">
-<a href="index.html">English</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="index.th.html">ภาษาไทย</a>
+<a href="index.html">English</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="index.th.html">ภาษาไทย</a>  
 <!-- form basically inspired by http://www.free-online-calculator-use.com/car-buying-calculator.html -->
 <form ng-submit="calculateCosts()">
   <ul>
     <li>
-      Price of car: <input type="number" ng-model="data.price" size="30">
+      ราคารถ: <input type="number" ng-model="data.price" size="30">
     </li>
     <li>
-      Sales Tax: <input type="number" ng-model="data.tax" size="30">
+      ภาษี: <input type="number" ng-model="data.tax" size="30">
     </li>
     <li>
-      Annual registration: <input type="number" ng-model="data.registration" size="30">
+      ค่าทะเบียนรายปี: <input type="number" ng-model="data.registration" size="30">
     </li>
     <li>
-      Financing? <input type="radio" ng-model="data.financing" ng-value="true" />Yes
-    <input type="radio" ng-model="data.financing" ng-value="false" />no
+      ไฟแนนซ์? <input type="radio" ng-model="data.financing" ng-value="true" />ใช่
+    <input type="radio" ng-model="data.financing" ng-value="false" />ไม่ใช่
     </li>
     <li>
-      Down payment: <input type="number" ng-model="data.downpayment" size="30">
+      ดาวน์: <input type="number" ng-model="data.downpayment" size="30">
     </li>
     <li>
-      APR: <input type="number" ng-model="data.apr" size="30">
+      ดอกเบี้ยรายปี: <input type="number" ng-model="data.apr" size="30">
     </li>
     <li>
-      Months financed: <input type="number" ng-model="data.monthsfinanced" size="30">
+      จำนวนเดือนที่ชำระ: <input type="number" ng-model="data.monthsfinanced" size="30">
     </li>
     <li>
-      Annual Insurance: <input type="number" ng-model="data.insurance" size="30">
+      ประกันรายปี: <input type="number" ng-model="data.insurance" size="30">
     </li>
     <li>
-      Kilometers driven per year: <input type="number" ng-model="data.distance" size="30">
+      กิโลเมตรที่ขับ: <input type="number" ng-model="data.distance" size="30">
     </li>
     <li>
-      Trips made per year (365 x 2 = 730): <input type="number" ng-model="data.annualtrips" size="30">
+      จำนวนเที่ยวต่อปี (365 x 2 = 730): <input type="number" ng-model="data.annualtrips" size="30">
     </li>
     <li>
-      Fuel economy (kilometers per litre) <input type="number" ng-model="data.fueleconomy" size="30">
+      อัตราการใช้น้ำมัน (กิโลเมตรต่อลิตร) <input type="number" ng-model="data.fueleconomy" size="30">
     </li>
     <li>
-      Fuel cost per litre: <input type="number" ng-model="data.fuelcost" size="30">
+      ราคาน้ำมันต่อลิตร: <input type="number" ng-model="data.fuelcost" size="30">
     </li>
     <li>
-      Years you expect to own this car: <input type="number" ng-model="data.caryears" size="30">
+      คาดว่าจะใช้รถกี่ปี: <input type="number" ng-model="data.caryears" size="30">
     </li>
     <li>
-      Annual maintenance & repair cost: <input type="number" ng-model="data.maintenance" size="30">
+      ค่าบำรุงรายปี: <input type="number" ng-model="data.maintenance" size="30">
     </li>
     <input type="submit" value="Calculate">
 </form>  
 <table>
   <tr>
-    <td>Car</td>
+    <td>รถยนต์</td>
     <td>Grab Taxi</td>
     <td>UberX</td>
     <td>Uber Black</td>
