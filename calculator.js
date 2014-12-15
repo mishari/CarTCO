@@ -73,7 +73,16 @@ angular.module('todoApp', [])
     var carTCO = 0;
     // Price per year is price of car averaged over several years.
     var price_per_year = $scope.data.price / $scope.data.caryears;
+    
     carTCO += price_per_year;
+    
+    // If finance, calculate interest
+    
+    if ($scope.data.financing == true) {
+      
+      carTCO += calculateInterest() / $scope.data.caryears;
+      
+    }
       
     // Add cost of petrol
     carTCO += ($scope.data.distance / $scope.data.fueleconomy) * $scope.data.fuelcost;
@@ -85,6 +94,19 @@ angular.module('todoApp', [])
     carTCO += $scope.data.maintenance;
             
     return carTCO;
+  };
+  
+  calculateInterest = function(){
+    
+    // How much are we financing is price minus down payment
+    var finance_amount = $scope.data.price - $scope.data.downpayment;
+    
+    // total interest is interest * number of years * amount to finance
+    var total_interest = ($scope.data.monthsfinanced / 12) * ($scope.data.apr / 100) * finance_amount;
+        
+    return total_interest;
+    
+    
   };
   
 }]);
