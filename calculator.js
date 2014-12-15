@@ -50,18 +50,18 @@ angular.module('todoApp', [])
     var distance_per_trip = $scope.data.distance / $scope.data.annualtrips;
   
   	for (running_distance = 2; running_distance < $scope.data.distance ; running_distance++){
-  		if(running_distance <= 12){
-  			increase =  5;
-  		} else if(running_distance > 12 && running_distance <= 20){
-  			increase = 5.5;
-  		} else if(running_distance > 20 && running_distance <= 40){
-  			increase = 6;
-  		} else if(running_distance > 40 && running_distance <= 60){
+  		if(running_distance <= 10){
+  			increase =  5.5;
+  		} else if(running_distance > 10 && running_distance <= 20){
   			increase = 6.5;
-  		} else if(running_distance > 60 && running_distance <= 80){
+  		} else if(running_distance > 20 && running_distance <= 40){
   			increase = 7.5;
+  		} else if(running_distance > 40 && running_distance <= 60){
+  			increase = 8;
+  		} else if(running_distance > 60 && running_distance <= 80){
+  			increase = 9;
   		} else if(running_distance > 80){
-  			increase = 8.5;
+  			increase = 10.5;
 			}
       
   		fare = fare + increase;
@@ -108,6 +108,10 @@ angular.module('todoApp', [])
     
     
   };
+  
+  reset = function(){
+    $scope.CostCalculatorController.$setPristine(true);
+  }
   
 }]);
 
