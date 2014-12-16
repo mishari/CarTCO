@@ -137,20 +137,20 @@
     </form>
     <table class="table table-bordered">
       <tr>
-        <td>{{ 'OWNCAR' | translate }}</td>
-        <td>{{ carCost | currency : currencySYMB : 0 }}</td>
+        <td class="col-sm-6">{{ 'OWNCAR' | translate }}</td>
+        <td class="col-sm-6">{{ carCost | currency : currencySYMB : 0 }}</td>
       </tr>
       <tr>
-        <td>Grab Taxi</td>
-        <td>{{ grabTaxiCost | currency : currencySYMB : 0 }}</td>
+        <td class="col-sm-6">Grab Taxi</td>
+        <td class="col-sm-6">{{ grabTaxiCost | currency : currencySYMB : 0 }}</td>
       </tr>
       <tr>
-        <td>UberX</td>
-        <td>{{ uberxCost | currency : currencySYMB : 0 }}</td>
+        <td class="col-sm-6">UberX</td>
+        <td class="col-sm-6">{{ uberxCost | currency : currencySYMB : 0 }}</td>
       </tr>
       <tr>
-        <td>Uber Black</td>
-        <td>{{ uberblkCost | currency : currencySYMB : 0 }}</td>
+        <td class="col-sm-6">Uber Black</td>
+        <td class="col-sm-6">{{ uberblkCost | currency : currencySYMB : 0 }}</td>
       </tr>
     </table>
     <button type="button" class="btn btn-default" ng-click="reset()">{{ 'RESET' | translate }}</button>
