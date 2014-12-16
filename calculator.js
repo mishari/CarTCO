@@ -174,6 +174,8 @@ angular.module('TCOApp', ['pascalprecht.translate'])
     YEARSYOUEXPECTTOOWNTHISCAR: 'Years You Expect To Own This Car',
     ANNUALMAINTENANCEREPAIRCOST: 'Annual Maintenance & Repair Cost',
     OWNCAR: 'Car',
+    RESET: 'Reset',
+    SHOWSAMPLEDATA: 'Show Sample Data',
     CSSEN: 'btn-primary',
     CSSTH: 'btn-default'
   });
@@ -197,6 +199,8 @@ angular.module('TCOApp', ['pascalprecht.translate'])
     YEARSYOUEXPECTTOOWNTHISCAR: 'คาดว่าจะใช้รถกี่ปี',
     ANNUALMAINTENANCEREPAIRCOST: 'ค่าบำรุงรายปี',
     OWNCAR: 'รถยนต์',
+    RESET: 'Reset',
+    SHOWSAMPLEDATA: 'Show Sample Data',
     CSSEN: 'btn-default',
     CSSTH: 'btn-primary'
   });
