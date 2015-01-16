@@ -16,102 +16,193 @@
     You should have received a copy of the GNU Affero General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-angular.module('todoApp', [])
-.controller('CostCalculatorController', ['$scope', function($scope) {
+angular.module('TCOApp', ['pascalprecht.translate'])
+.controller('CostCalculatorController', ['$scope', '$translate', function($scope, $translate) {
   /* Average speed in BKK from
    http://www.otp.go.th/th/pdf/statistic/speed/speed_avg_53.pdf
   converted to KMs per minute*/
-  var AVG_SPEED = 0.333; 
+  var AVG_SPEED = 0.333;
   var UBERX_FLAG = 25;
   var UBERX_PERKM = 4.5;
   var UBERX_PERMIN = 1;
-  
+
   var UBERBLK_FLAG = 45;
   var UBERBLK_PERKM = 9.2;
   var UBERBLK_PERMIN = 2.5;
-  
+
   var GRABTAXI_FEE = 25;
 
-  $scope.data = {annualtrips : 730};
-  
-  $scope.data.financing = true;
-  
-  $scope.calculateCosts = function() {
-    $scope.uberxCost = ($scope.data.annualtrips * UBERX_FLAG) + $scope.data.distance * UBERX_PERKM + ($scope.data.distance / AVG_SPEED) * UBERX_PERMIN;
-    $scope.uberblkCost = ($scope.data.annualtrips * UBERBLK_FLAG) + $scope.data.distance * UBERBLK_PERKM + ($scope.data.distance / AVG_SPEED) * UBERBLK_PERMIN;
-    $scope.grabTaxiCost = ($scope.data.annualtrips * GRABTAXI_FEE) + calculateTaxi();
-    $scope.carCost = calculateCarCosts();
+  $scope.currencySYMB = "TH฿ ";
+
+
+  $scope.data = {
+    "financing": true
   };
-  
-  calculateTaxi = function() {
-    var fare = 35;
-    var increase = 5;
-	  
-    var distance_per_trip = $scope.data.distance / $scope.data.annualtrips;
-  
-  	for (running_distance = 2; running_distance < $scope.data.distance ; running_distance++){
-  		if(running_distance <= 10){
-  			increase =  5.5;
-  		} else if(running_distance > 10 && running_distance <= 20){
-  			increase = 6.5;
-  		} else if(running_distance > 20 && running_distance <= 40){
-  			increase = 7.5;
-  		} else if(running_distance > 40 && running_distance <= 60){
-  			increase = 8;
-  		} else if(running_distance > 60 && running_distance <= 80){
-  			increase = 9;
-  		} else if(running_distance > 80){
-  			increase = 10.5;
-			}
-      
-  		fare = fare + increase;
-		}
-  	return fare
-  };
-  
-  calculateCarCosts = function() {
-    var carTCO = 0;
+
+  $scope.$watchCollection('data', function() {
+    $scope.progressbar      = { "max": getProgressbarMax()};
+    $scope.carCost          = calculateCarCosts();
+    $scope.grabTaxiCost     = calculateGrabTaxiCost();
+    $scope.uberxCost        = calculateUberXCost();
+    $scope.uberblkCost      = calculateUberBlkCost();
+  });
+
+  function getProgressbarMax()
+  {
+    return 1000000;
+  }
+
+  function calculateGrabTaxiCost()
+  {
+    return ($scope.data.annualtrips * GRABTAXI_FEE) + calculateTaxi() || 0;
+  }
+
+  function calculateUberXCost()
+  {
+    return ($scope.data.annualtrips * UBERX_FLAG) + $scope.data.distance * UBERX_PERKM + ($scope.data.distance / AVG_SPEED) * UBERX_PERMIN || 0;
+  }
+
+  function calculateUberBlkCost()
+  {
+    return ($scope.data.annualtrips * UBERBLK_FLAG) + $scope.data.distance * UBERBLK_PERKM + ($scope.data.distance / AVG_SPEED) * UBERBLK_PERMIN || 0;
+  }
+
+  function calculateCarCosts()
+  {
+
     // Price per year is price of car averaged over several years.
-    var price_per_year = $scope.data.price / $scope.data.caryears;
-    
-    carTCO += price_per_year;
-    
+    var carTCO = $scope.data.price / $scope.data.caryears;
+
     // If finance, calculate interest
-    
-    if ($scope.data.financing == true) {
-      
-      carTCO += calculateInterest() / $scope.data.caryears;
-      
+    if ($scope.data.financing) {
+
+      carTCO =+ ($scope.data.monthsfinanced / 12) * ($scope.data.apr / 100) * ( $scope.data.price - $scope.data.downpayment ) / $scope.data.caryears;
+
     }
-      
+
+    // Price per year is price of car averaged over several years.
+    carTCO += $scope.data.price / $scope.data.caryears;
+
     // Add cost of petrol
     carTCO += ($scope.data.distance / $scope.data.fueleconomy) * $scope.data.fuelcost;
-    
+
     // Add annual registration costs
     carTCO += $scope.data.registration;
-    
+
     // Add annual repair costs
     carTCO += $scope.data.maintenance;
-            
-    return carTCO;
-  };
-  
-  calculateInterest = function(){
-    
-    // How much are we financing is price minus down payment
-    var finance_amount = $scope.data.price - $scope.data.downpayment;
-    
-    // total interest is interest * number of years * amount to finance
-    var total_interest = ($scope.data.monthsfinanced / 12) * ($scope.data.apr / 100) * finance_amount;
-        
-    return total_interest;
-    
-    
-  };
-  
-  reset = function(){
-    $scope.CostCalculatorController.$setPristine(true);
-  }
-  
-}]);
 
+    //default to zero if some field are undefined
+    return carTCO || 0;
+
+  };
+
+  function calculateTaxi ()
+  {
+    var fare = 35;
+    var increase = 5;
+
+    var distance_per_trip = $scope.data.distance / $scope.data.annualtrips;
+
+    for (running_distance = 2; running_distance < $scope.data.distance ; running_distance++){
+      if(running_distance <= 10){
+        increase =  5.5;
+      } else if(running_distance > 10 && running_distance <= 20){
+        increase = 6.5;
+      } else if(running_distance > 20 && running_distance <= 40){
+        increase = 7.5;
+      } else if(running_distance > 40 && running_distance <= 60){
+        increase = 8;
+      } else if(running_distance > 60 && running_distance <= 80){
+        increase = 9;
+      } else if(running_distance > 80){
+        increase = 10.5;
+      }
+
+      fare = fare + increase;
+    }
+    return fare
+  };
+
+  $scope.reset = function(){
+    $scope.data = {"financing": true};
+  }
+
+  $scope.sample = function(){
+    $scope.data = {
+      "financing": true,
+      "price": 1200000,
+      "tax": 12,
+      "registration": 2000,
+      "downpayment": 200000,
+      "apr": 12,
+      "monthsfinanced": 42,
+      "insurance": 2000,
+      "distance": 30000,
+      "annualtrips": 730,
+      "fueleconomy": 15,
+      "fuelcost": 33,
+      "caryears": 10,
+      "maintenance": 8000
+    };
+  }
+
+  $scope.changeLanguage = function (key) {
+    $translate.use(key);
+  };
+
+}])
+
+.config(function($translateProvider) {
+ $translateProvider.translations('en', {
+    PRICEOFCAR: 'Price of car',
+    SALESTAX: 'Sales Tax',
+    ANNULAREGISTRATION: 'Annual Registration',
+    FINANCING: 'Financing',
+    USESFINANCING: 'Uses Financing',
+    DOWNPAYMENT: 'Down Payment',
+    APR: 'APR',
+    MONTHFINANCED: 'Months Financed',
+    MONTH: 'Month',
+    YEARS: 'Years',
+    ANNUALINSURANCE: 'Annual Insurance',
+    KILOMETERDRIVENPERYEAR: 'Kilometers Driven Per Year',
+    KM: 'km',
+    TRIPSMADEPERYEAR: 'Trips Made Per Year',
+    FUELECONOMY: 'Fuel economy',
+    FUELCOSTPERLITRE: 'Fuel Cost Per Litre',
+    YEARSYOUEXPECTTOOWNTHISCAR: 'Years You Expect To Own This Car',
+    ANNUALMAINTENANCEREPAIRCOST: 'Annual Maintenance & Repair Cost',
+    OWNCAR: 'Car',
+    RESET: 'Reset',
+    SHOWSAMPLEDATA: 'Show Sample Data',
+    CSSEN: 'btn-primary',
+    CSSTH: 'btn-default'
+  });
+ $translateProvider.translations('th', {
+    PRICEOFCAR: 'ราคารถ',
+    SALESTAX: 'ภาษี',
+    ANNULAREGISTRATION: 'ค่าทะเบียนรายปี',
+    FINANCING: 'ไฟแนนซ์',
+    USESFINANCING: 'ทำไฟแนนซ์',
+    DOWNPAYMENT: 'ดาวน์',
+    APR: 'ดอกเบี้ยรายปี',
+    MONTHFINANCED: 'จำนวนเดือนที่ชำระ',
+    MONTH: 'เดือน',
+    YEARS: 'ปี',
+    ANNUALINSURANCE: 'ประกันรายปี',
+    KILOMETERDRIVENPERYEAR: 'กิโลเมตรที่ขับ',
+    KM: 'กม.',
+    TRIPSMADEPERYEAR: 'จำนวนเที่ยวต่อปี',
+    FUELECONOMY: ' อัตราการใช้น้ำมัน (กิโลเมตรต่อลิตร)',
+    FUELCOSTPERLITRE: 'ราคาน้ำมันต่อลิตร',
+    YEARSYOUEXPECTTOOWNTHISCAR: 'คาดว่าจะใช้รถกี่ปี',
+    ANNUALMAINTENANCEREPAIRCOST: 'ค่าบำรุงรายปี',
+    OWNCAR: 'รถยนต์',
+    RESET: 'เริ่มใหม่',
+    SHOWSAMPLEDATA: 'แสดงข้อมูลจำลอง',
+    CSSEN: 'btn-default',
+    CSSTH: 'btn-primary'
+  });
+ $translateProvider.preferredLanguage('th');
+})
