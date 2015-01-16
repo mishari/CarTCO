@@ -32,7 +32,7 @@ angular.module('TCOApp', ['pascalprecht.translate'])
 
   var GRABTAXI_FEE = 25;
 
-  $scope.currencySYMB = "TBH ";
+  $scope.currencySYMB = "TH฿ ";
 
 
   $scope.data = {
@@ -184,23 +184,23 @@ angular.module('TCOApp', ['pascalprecht.translate'])
     SALESTAX: 'ภาษี',
     ANNULAREGISTRATION: 'ค่าทะเบียนรายปี',
     FINANCING: 'ไฟแนนซ์',
-    USESFINANCING: 'Uses Financing',
+    USESFINANCING: 'ทำไฟแนนซ์',
     DOWNPAYMENT: 'ดาวน์',
     APR: 'ดอกเบี้ยรายปี',
     MONTHFINANCED: 'จำนวนเดือนที่ชำระ',
-    MONTH: 'Month',
-    YEARS: 'Years',
+    MONTH: 'เดือน',
+    YEARS: 'ปี',
     ANNUALINSURANCE: 'ประกันรายปี',
     KILOMETERDRIVENPERYEAR: 'กิโลเมตรที่ขับ',
-    KM: 'km',
+    KM: 'กม.',
     TRIPSMADEPERYEAR: 'จำนวนเที่ยวต่อปี',
     FUELECONOMY: ' อัตราการใช้น้ำมัน (กิโลเมตรต่อลิตร)',
     FUELCOSTPERLITRE: 'ราคาน้ำมันต่อลิตร',
     YEARSYOUEXPECTTOOWNTHISCAR: 'คาดว่าจะใช้รถกี่ปี',
     ANNUALMAINTENANCEREPAIRCOST: 'ค่าบำรุงรายปี',
     OWNCAR: 'รถยนต์',
-    RESET: 'Reset',
-    SHOWSAMPLEDATA: 'Show Sample Data',
+    RESET: 'เริ่มใหม่',
+    SHOWSAMPLEDATA: 'แสดงข้อมูลจำลอง',
     CSSEN: 'btn-default',
     CSSTH: 'btn-primary'
   });
