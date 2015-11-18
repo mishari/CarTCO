@@ -30,8 +30,6 @@ angular.module('TCOApp', ['pascalprecht.translate'])
   var UBERBLK_PERKM = 9.2;
   var UBERBLK_PERMIN = 2.5;
 
-  var GRABTAXI_FEE = 25;
-
   $scope.currencySYMB = "TH฿ ";
 
 
@@ -42,7 +40,7 @@ angular.module('TCOApp', ['pascalprecht.translate'])
   $scope.$watchCollection('data', function() {
     $scope.progressbar      = { "max": getProgressbarMax()};
     $scope.carCost          = calculateCarCosts();
-    $scope.grabTaxiCost     = calculateGrabTaxiCost();
+    $scope.taxiCost     = calculateTaxiCost();
     $scope.uberxCost        = calculateUberXCost();
     $scope.uberblkCost      = calculateUberBlkCost();
   });
@@ -52,9 +50,9 @@ angular.module('TCOApp', ['pascalprecht.translate'])
     return 1000000;
   }
 
-  function calculateGrabTaxiCost()
+  function calculateTaxiCost()
   {
-    return ($scope.data.annualtrips * GRABTAXI_FEE) + calculateTaxi() || 0;
+    return $scope.data.annualtrips  + calculateTaxi() || 0;
   }
 
   function calculateUberXCost()

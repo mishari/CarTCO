@@ -75,7 +75,7 @@
             <label for="apr" class="control-label">{{ 'APR' | translate }}</label>
             <div class="input-group">
               <input class="form-control" type="number" name="apr" ng-model="data.apr">
-              <span class="input-group-addon">{{ currencySYMB }}</span>
+              <span class="input-group-addon">%</span>
             </div>
           </div>
           <div class="form-group" ng-show="data.financing">
@@ -143,8 +143,8 @@
         <td class="col-sm-6">{{ carCost | currency : currencySYMB : 0 }}</td>
       </tr>
       <tr>
-        <td class="col-sm-6">Grab Taxi</td>
-        <td class="col-sm-6">{{ grabTaxiCost | currency : currencySYMB : 0 }}</td>
+        <td class="col-sm-6">Taxi</td>
+        <td class="col-sm-6">{{ taxiCost | currency : currencySYMB : 0 }}</td>
       </tr>
       <tr>
         <td class="col-sm-6">UberX</td>
