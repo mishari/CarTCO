@@ -35,7 +35,28 @@ angular.module('TCOApp', ['pascalprecht.translate'])
 
   $scope.data = {
     "financing": true,
+<<<<<<< HEAD
     "timevalue": true
+=======
+    "timevalue": true,
+    
+    "price": 0,
+    "tax": 0,
+    "registration": 0,
+    "downpayment": 0,
+    "apr": 0,
+    "monthsfinanced": 0,
+    "annualincome": 0,
+    "hoursperweek": 0,
+    "insurance": 0,
+    "distance": 0,
+    "annualtrips": 0,
+    "fueleconomy": 0,
+    "fuelcost": 0,
+    "caryears": 0,
+    "maintenance": 0,
+    
+>>>>>>> develop
   };
 
   $scope.$watchCollection('data', function() {
@@ -133,8 +154,32 @@ angular.module('TCOApp', ['pascalprecht.translate'])
   };
 
   $scope.reset = function(){
+<<<<<<< HEAD
     $scope.data = {"financing": true};
     $scope.data = {"timevalue": true};
+=======
+    $scope.data = {
+      "financing": true,
+      "timevalue": true,
+    
+      "price": 0,
+      "tax": 0,
+      "registration": 0,
+      "downpayment": 0,
+      "apr": 0,
+      "monthsfinanced": 0,
+      "annualincome": 0,
+      "hoursperweek": 0,
+      "insurance": 0,
+      "distance": 0,
+      "annualtrips": 0,
+      "fueleconomy": 0,
+      "fuelcost": 0,
+      "caryears": 0,
+      "maintenance": 0,
+    
+    };
+>>>>>>> develop
     
   }
 
