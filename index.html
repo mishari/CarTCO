@@ -85,6 +85,28 @@
               <span class="input-group-addon">{{ 'MONTH' | translate }}</span>
             </div>
           </div>
+          <div class="form-group">
+            <label for="timevalue" class="control-label">{{ 'TIMEVALUE' | translate }}</label>
+            <div class="checkbox">
+              <label>
+                <input type="checkbox" ng-model="data.timevalue" ng-value="true"> {{ 'CALCULATETIMEVALUE' | translate }}
+              </label>
+            </div>
+          </div>
+          <div class="form-group" ng-show="data.timevalue">
+            <label for="annualincome" class="control-label">{{ 'ANNUALINCOME' | translate }}</label>
+            <div class="input-group">
+              <input class="form-control" type="number" name="annualincome" ng-model="data.annualincome">
+              <span class="input-group-addon">{{ currencySYMB }}</span>
+            </div>
+          </div>
+          <div class="form-group" ng-show="data.timevalue">
+            <label for="hoursperweek" class="control-label">{{ 'HOURSPERWEEK' | translate }}</label>
+            <div class="input-group">
+              <input class="form-control" type="number" name="hoursperweek" ng-model="data.hoursperweek">
+              <span class="input-group-addon">{{ 'HOURS' | translate }}</span>
+            </div>
+          </div>
         </div>
         <div class="col-sm-6">
           <div class="form-group">

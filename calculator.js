@@ -34,7 +34,8 @@ angular.module('TCOApp', ['pascalprecht.translate'])
 
 
   $scope.data = {
-    "financing": true
+    "financing": true,
+    "timevalue": true
   };
 
   $scope.$watchCollection('data', function() {
@@ -74,13 +75,21 @@ angular.module('TCOApp', ['pascalprecht.translate'])
     // If finance, calculate interest
     if ($scope.data.financing) {
 
-      carTCO =+ ($scope.data.monthsfinanced / 12) * ($scope.data.apr / 100) * ( $scope.data.price - $scope.data.downpayment ) / $scope.data.caryears;
+      
+      carTCO += ($scope.data.monthsfinanced / 12) * ($scope.data.apr / 100) * ( $scope.data.price - $scope.data.downpayment ) / $scope.data.caryears;
+
 
     }
-
-    // Price per year is price of car averaged over several years.
-    carTCO += $scope.data.price / $scope.data.caryears;
-
+    
+    if ($scope.data.timevalue) {
+      
+      var hourlyIncome = $scope.data.annualincome / ( $scope.data.hoursperweek * 52 );
+      var hoursTravelled = $scope.data.distance / (AVG_SPEED * 60);
+      
+      carTCO += hourlyIncome * hoursTravelled;
+      
+    }
+    
     // Add cost of petrol
     carTCO += ($scope.data.distance / $scope.data.fueleconomy) * $scope.data.fuelcost;
 
@@ -89,6 +98,7 @@ angular.module('TCOApp', ['pascalprecht.translate'])
 
     // Add annual repair costs
     carTCO += $scope.data.maintenance;
+    
 
     //default to zero if some field are undefined
     return carTCO || 0;
@@ -124,24 +134,30 @@ angular.module('TCOApp', ['pascalprecht.translate'])
 
   $scope.reset = function(){
     $scope.data = {"financing": true};
+    $scope.data = {"timevalue": true};
+    
   }
 
   $scope.sample = function(){
     $scope.data = {
       "financing": true,
       "price": 1200000,
-      "tax": 12,
+      "tax": 17,
       "registration": 2000,
       "downpayment": 200000,
-      "apr": 12,
-      "monthsfinanced": 42,
-      "insurance": 2000,
+      "apr": 2,
+      "monthsfinanced": 60,
+      "insurance": 12000,
       "distance": 30000,
-      "annualtrips": 730,
+      "annualtrips": 520,
       "fueleconomy": 15,
-      "fuelcost": 33,
+      "fuelcost": 25,
       "caryears": 10,
-      "maintenance": 8000
+      "maintenance": 8000,
+      "timevalue": true,
+      "annualincome": 600000,
+      "hoursperweek": 40,
+      
     };
   }
 
@@ -171,16 +187,23 @@ angular.module('TCOApp', ['pascalprecht.translate'])
     FUELCOSTPERLITRE: 'Fuel Cost Per Litre',
     YEARSYOUEXPECTTOOWNTHISCAR: 'Years You Expect To Own This Car',
     ANNUALMAINTENANCEREPAIRCOST: 'Annual Maintenance & Repair Cost (eg. annual checkup, engine oil, tyres, parts etc)',
-    OWNCAR: 'Car',
+    OWNCAR: 'Private Car',
     YEARLYEXPENSE: 'Annual expense',
     RESET: 'Reset',
     SHOWSAMPLEDATA: 'Show Sample Data',
     CSSEN: 'btn-primary',
-    CSSTH: 'btn-default'
+    CSSTH: 'btn-default',
+
+    TIMEVALUE: 'Time Value',
+    CALCULATETIMEVALUE: 'Include The Value of your Travelling Time',
+    ANNUALINCOME: 'Annual Income',
+    HOURSPERWEEK: 'Hours worked per week',
+    HOURS: 'Hours',
+   
   });
  $translateProvider.translations('th', {
     PRICEOFCAR: 'ราคารถ',
-    SALESTAX: 'ภาษีการขายเป็น % (เช่น VAT ก็กรอกแค่ 7)',
+    SALESTAX: 'อัตราภาษีตอนซื้อรถเป็น % (เช่น VAT 7%)',
     ANNULAREGISTRATION: 'ค่าทะเบียนรายปี',
     FINANCING: 'ไฟแนนซ์',
     USESFINANCING: 'ทำไฟแนนซ์',
@@ -197,12 +220,20 @@ angular.module('TCOApp', ['pascalprecht.translate'])
     FUELCOSTPERLITRE: 'ราคาน้ำมันต่อลิตร',
     YEARSYOUEXPECTTOOWNTHISCAR: 'คาดว่าจะใช้รถกี่ปี',
     ANNUALMAINTENANCEREPAIRCOST: 'ค่าบำรุงรายปี (ค่าเช็คระยะ น้ำมันเครื่อง ไส้กรอง ยางรถยนต์ อะไหล่ ฯลฯ)',
-    OWNCAR: 'รถยนต์',
+    OWNCAR: 'รถยนต์ส่วนตัว',
     RESET: 'เริ่มใหม่',
     SHOWSAMPLEDATA: 'แสดงข้อมูลสมมุติ',
     YEARLYEXPENSE: 'ค่าใช้จ่ายรายปี',
     CSSEN: 'btn-default',
-    CSSTH: 'btn-primary'
+    CSSTH: 'btn-primary',
+   
+    TIMEVALUE: 'มูลค่าของเวลา',
+    CALCULATETIMEVALUE: 'คำนวนค่าของเวลาที่ใช้ในการขับรถ',
+    ANNUALINCOME: 'รายได้ต่อปี',
+    HOURSPERWEEK: 'จำนวนชั่วโมงที่ทำงานต่อสัปดาห์',
+    HOURS: 'ชั่วโมง',
+   
+   
   });
  $translateProvider.preferredLanguage('th');
 })
