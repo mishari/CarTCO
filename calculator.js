@@ -35,9 +35,6 @@ angular.module('TCOApp', ['pascalprecht.translate'])
 
   $scope.data = {
     "financing": true,
-<<<<<<< HEAD
-    "timevalue": true
-=======
     "timevalue": true,
     
     "price": 0,
@@ -55,8 +52,7 @@ angular.module('TCOApp', ['pascalprecht.translate'])
     "fuelcost": 0,
     "caryears": 0,
     "maintenance": 0,
-    
->>>>>>> develop
+
   };
 
   $scope.$watchCollection('data', function() {
@@ -154,10 +150,6 @@ angular.module('TCOApp', ['pascalprecht.translate'])
   };
 
   $scope.reset = function(){
-<<<<<<< HEAD
-    $scope.data = {"financing": true};
-    $scope.data = {"timevalue": true};
-=======
     $scope.data = {
       "financing": true,
       "timevalue": true,
@@ -179,7 +171,6 @@ angular.module('TCOApp', ['pascalprecht.translate'])
       "maintenance": 0,
     
     };
->>>>>>> develop
     
   }
 
